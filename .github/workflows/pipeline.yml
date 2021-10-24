@@ -25,7 +25,15 @@ jobs:
       - name: Test
         run: dotnet test --no-restore --verbosity normal
         
-      - name: Azure WebApp
+      - name: Azure Login
+        uses: Azure/login@v1.4.0
+        with:
+            creds: ${{ secrets.AZURE_CREDENTIALS }}
+            client-id: ${{ secrets.AZURE_CLIENTID }}
+            tenant-id: ${{ secrets.AZURE_TENANTID }}
+            subscription-id: ${{ secrets.AZURE_SUBSCRIPTIONID }} 
+            
+      - name: Deploy to Azure 
         uses: Azure/webapps-deploy@v2
         with:
           app-name: BP-X00192332
