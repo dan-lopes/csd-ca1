@@ -16,7 +16,7 @@ jobs:
       - name: Setup .NET Core SDK
         uses: actions/setup-dotnet@v1.8.2
 
-      - name: Install dependencies
+      - name: Restore dependencies
         run: dotnet restore
         
       - name: Build
@@ -24,3 +24,8 @@ jobs:
         
       - name: Test
         run: dotnet test --no-restore --verbosity normal
+        
+      - name: Azure WebApp
+        uses: Azure/webapps-deploy@v2
+        with:
+          app-name: BP-X00192332
