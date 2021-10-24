@@ -30,8 +30,9 @@ namespace BPCalculator
         {
             get
             {
-                // implement as part of project
-                throw new NotImplementedException("not implemented yet");        
+                //TODO: implement as part of project
+                //throw new NotImplementedException("not implemented yet");        
+                return BPCategory.Low;
             }
         }
     }
