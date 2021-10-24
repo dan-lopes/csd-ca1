@@ -25,8 +25,8 @@ jobs:
       - name: Test
         run: dotnet test --no-restore --verbosity normal
 
-      - name: Publish
-        run: dotnet publish -c Release -o './BP'
+      #- name: Publish
+        #run: dotnet publish -c Release -o './BP'
 
       - name: Azure Login
         uses: Azure/login@v1.4.0
@@ -37,5 +37,5 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: BP-X00192332
-          publish-profile:  ${{ secrets.PUBLISH_PROFILE }}
-          package: './BP'
+          #publish-profile:  ${{ secrets.PUBLISH_PROFILE }}
+          #package: './BP'
