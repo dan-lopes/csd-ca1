@@ -37,5 +37,4 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: BP-X00192332
-          #publish-profile:  ${{ secrets.PUBLISH_PROFILE }}
           package: './BP'
