@@ -5,7 +5,7 @@ using Xunit;
 namespace BPCalculator.BDDTests
 {
     [Binding]
-    public class CalculateBloodPressureFeature
+    public sealed class CalculateBloodPressureFeature
     {
         private int _systolic;
         private int _diastolic;
