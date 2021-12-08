@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!--
+<copyright file="Signing.targets" company="Eurofins">
+ Copyright 2020 Eurofins Scientific Ltd, Ireland
+ Usage reserved to Eurofins Global Franchise Model subscribers.
+</copyright>
+
+Version: 3.0
+
+Changelog:
+  2.0 Added signature on satellite assemblies
+  3.0 Switched to signtool.exe (embedded, fallback on R:) instead of the target SignFile, so people don't have to install SDK, and allowed to configure TimestampUrl as a parameter.
+-->
+
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+    <Target Name="CodeSigningProperties">
+        <PropertyGroup>
+            <SignToolFolderPath Condition="'$(SignToolFolderPath)' == ''">$(MSBuildThisFileDirectory)</SignToolFolderPath>
+            <SignToolFolderPath Condition="'$(SignToolFolderPath)' == ''">R:\Microsoft\SignTool\</SignToolFolderPath>
+            <SignToolPath>$(SignToolFolderPath)signtool.exe</SignToolPath>
+
+            <!-- <TimestampUrl>http://timestamp.verisign.com/scripts/timstamp.dll</TimestampUrl> -->
+            <TimestampUrl Condition="'$(TimestampUrl)' == ''">http://timestamp.digicert.com</TimestampUrl>
+        </PropertyGroup>
+
+        <PropertyGroup>
+            <CodeSignThumbprint>bae357be228e1cec42e3631c61f56c2e47e7eeea</CodeSignThumbprint>
+        </PropertyGroup>
+    </Target>
+
+    <!-- Signing of main assembly output -->
+    <Target Name="CodeSigning" BeforeTargets="CopyFilesToOutputDirectory" DependsOnTargets="CodeSigningProperties">
+        <Message Text="Signing code @(IntermediateAssembly)..." />
+
+        <Exec
+            Condition="'$(Configuration)' == 'Release'"
+            Command="$(SignToolPath) sign /sha1 &quot;$(CodeSignThumbprint)&quot; /tr &quot;$(TimestampUrl)&quot; /fd sha256 &quot;@(IntermediateAssembly)&quot;" />
+
+        <Exec
+            Condition="'$(Configuration)' != 'Release'"
+            Command="$(SignToolPath) sign /sha1 &quot;$(CodeSignThumbprint)&quot; /fd sha256 &quot;@(IntermediateAssembly)&quot;" />
+    </Target>
+
+    <!-- Signing of satellite assemblies, if any -->
+    <Target Name="CodeSigningSatelliteAssembly" AfterTargets="GenerateSatelliteAssemblies"
+        Inputs="$(IntermediateOutputPath)%(EmbeddedResource.Culture)\$(TargetName).resources.dll"
+        Outputs="%(Identity).Dummy"
+        DependsOnTargets="CodeSigningProperties">
+
+        <PropertyGroup>
+            <Culture>%(EmbeddedResource.Culture)</Culture>
+        </PropertyGroup>
+
+        <PropertyGroup>
+            <SignSatelliteConfiguration Condition="'$(Culture)' != '' And '$(Configuration)' == 'Release'">Release</SignSatelliteConfiguration>
+            <SignSatelliteConfiguration Condition="'$(Culture)' != '' And '$(SignSatelliteConfiguration)' == ''">Debug</SignSatelliteConfiguration>
+        </PropertyGroup>
+
+        <Message Condition="'$(SignSatelliteConfiguration)' != ''"
+            Text="Signing satellite assembly $(IntermediateOutputPath)$(Culture)\$(TargetName).resources.dll..." />
+
+        <Exec
+            Condition="'$(SignSatelliteConfiguration)' == 'Release'"
+            Command="$(SignToolPath) sign /sha1 &quot;$(CodeSignThumbprint)&quot; /tr &quot;$(TimestampUrl)&quot; /fd sha256 &quot;$(IntermediateOutputPath)$(Culture)\$(TargetName).resources.dll&quot;" />
+
+        <Exec
+            Condition="'$(SignSatelliteConfiguration)' == 'Debug'"
+            Command="$(SignToolPath) sign /sha1 &quot;$(CodeSignThumbprint)&quot; /fd sha256 &quot;$(IntermediateOutputPath)$(Culture)\$(TargetName).resources.dll&quot;" />
+
+    </Target>
+
+</Project>

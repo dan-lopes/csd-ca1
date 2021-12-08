@@ -8,4 +8,6 @@
     <Folder Include="Data\" />
   </ItemGroup>
 
+  <Import Project="..\Common\Targets\Signing.targets" />
+
 </Project>
