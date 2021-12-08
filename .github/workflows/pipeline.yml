@@ -16,14 +16,21 @@ jobs:
       - name: Setup .NET Core SDK
         uses: actions/setup-dotnet@v1.8.2
 
-      - name: Restore dependencies
+      - name: Restore Dependencies
         run: dotnet restore
         
-      - name: Build
+      - name: Build Project
         run: dotnet build --configuration Release --no-restore
         
-      - name: Test
+      - name: Run Unit Tests
         run: dotnet test --configuration Release --no-restore --verbosity normal
+        
+      - name: Run SpecFlow Tests
+        uses: cryptic-wizard/run-specflow-tests@v1.2.0
+        with:
+          test-assembly-dll: BPCalculator.BDDTests\bin\Debug\net5.0\BPCalculator.BDDTests.dll
+          framework: net5.0
+          no-build: true
 
       - name: Publish
         run: dotnet publish -c Release  -o './BP'
