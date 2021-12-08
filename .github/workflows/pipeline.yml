@@ -28,8 +28,8 @@ jobs:
       - name: Run BDD Tests - SpecFlow
         uses: cryptic-wizard/run-specflow-tests@v1.2.0
         with:
-          test-assembly-dll: BPCalculator.BDDTests/bin/Debug/net5.0/BPCalculator.BDDTests.dll
-          test-execution-json: BPCalculator.BDDTests/bin/Debug/net5.0/specflow.json
+          test-assembly-dll: BPCalculator.BDDTests/bin/Release/net5.0/BPCalculator.BDDTests.dll
+          test-execution-json: BPCalculator.BDDTests/bin/Release/net5.0/specflow.json
           framework: net5.0
           no-build: true
 
