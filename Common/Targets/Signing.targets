@@ -35,10 +35,6 @@ Changelog:
         <Message Text="Signing code @(IntermediateAssembly)..." />
 
         <Exec
-            Condition="'$(Configuration)' == 'Release'"
-            Command="$(SignToolPath) sign /sha1 &quot;$(CodeSignThumbprint)&quot; /tr &quot;$(TimestampUrl)&quot; /fd sha256 &quot;@(IntermediateAssembly)&quot;" />
-
-        <Exec
             Condition="'$(Configuration)' != 'Release'"
             Command="$(SignToolPath) sign /sha1 &quot;$(CodeSignThumbprint)&quot; /fd sha256 &quot;@(IntermediateAssembly)&quot;" />
     </Target>
@@ -54,16 +50,11 @@ Changelog:
         </PropertyGroup>
 
         <PropertyGroup>
-            <SignSatelliteConfiguration Condition="'$(Culture)' != '' And '$(Configuration)' == 'Release'">Release</SignSatelliteConfiguration>
             <SignSatelliteConfiguration Condition="'$(Culture)' != '' And '$(SignSatelliteConfiguration)' == ''">Debug</SignSatelliteConfiguration>
         </PropertyGroup>
 
         <Message Condition="'$(SignSatelliteConfiguration)' != ''"
             Text="Signing satellite assembly $(IntermediateOutputPath)$(Culture)\$(TargetName).resources.dll..." />
-
-        <Exec
-            Condition="'$(SignSatelliteConfiguration)' == 'Release'"
-            Command="$(SignToolPath) sign /sha1 &quot;$(CodeSignThumbprint)&quot; /tr &quot;$(TimestampUrl)&quot; /fd sha256 &quot;$(IntermediateOutputPath)$(Culture)\$(TargetName).resources.dll&quot;" />
 
         <Exec
             Condition="'$(SignSatelliteConfiguration)' == 'Debug'"
