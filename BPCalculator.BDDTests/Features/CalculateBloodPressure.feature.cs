@@ -80,14 +80,14 @@ namespace BPCalculator.BDDTests.Features
             this.TestTearDown();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="BloodPressureLow1")]
+        [Xunit.SkippableFactAttribute(DisplayName="BloodPressure70SystolicAnd40DiastolicIsLow")]
         [Xunit.TraitAttribute("FeatureTitle", "CalculateBloodPressureFeature")]
-        [Xunit.TraitAttribute("Description", "BloodPressureLow1")]
-        public virtual void BloodPressureLow1()
+        [Xunit.TraitAttribute("Description", "BloodPressure70SystolicAnd40DiastolicIsLow")]
+        public virtual void BloodPressure70SystolicAnd40DiastolicIsLow()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("BloodPressureLow1", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("BloodPressure70SystolicAnd40DiastolicIsLow", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 3
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -122,14 +122,14 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="BloodPressureLow2")]
+        [Xunit.SkippableFactAttribute(DisplayName="BloodPressure90SystolicAnd60DiastolicIsLow")]
         [Xunit.TraitAttribute("FeatureTitle", "CalculateBloodPressureFeature")]
-        [Xunit.TraitAttribute("Description", "BloodPressureLow2")]
-        public virtual void BloodPressureLow2()
+        [Xunit.TraitAttribute("Description", "BloodPressure90SystolicAnd60DiastolicIsLow")]
+        public virtual void BloodPressure90SystolicAnd60DiastolicIsLow()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("BloodPressureLow2", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("BloodPressure90SystolicAnd60DiastolicIsLow", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 8
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -164,14 +164,14 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="BloodPressureIdeal1")]
+        [Xunit.SkippableFactAttribute(DisplayName="BloodPressure91SystolicAnd61DiastolicIsIdeal")]
         [Xunit.TraitAttribute("FeatureTitle", "CalculateBloodPressureFeature")]
-        [Xunit.TraitAttribute("Description", "BloodPressureIdeal1")]
-        public virtual void BloodPressureIdeal1()
+        [Xunit.TraitAttribute("Description", "BloodPressure91SystolicAnd61DiastolicIsIdeal")]
+        public virtual void BloodPressure91SystolicAnd61DiastolicIsIdeal()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("BloodPressureIdeal1", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("BloodPressure91SystolicAnd61DiastolicIsIdeal", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 13
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -206,14 +206,14 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="BloodPressureIdeal2")]
+        [Xunit.SkippableFactAttribute(DisplayName="BloodPressure120SystolicAnd80DiastolicIsIdeal")]
         [Xunit.TraitAttribute("FeatureTitle", "CalculateBloodPressureFeature")]
-        [Xunit.TraitAttribute("Description", "BloodPressureIdeal2")]
-        public virtual void BloodPressureIdeal2()
+        [Xunit.TraitAttribute("Description", "BloodPressure120SystolicAnd80DiastolicIsIdeal")]
+        public virtual void BloodPressure120SystolicAnd80DiastolicIsIdeal()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("BloodPressureIdeal2", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("BloodPressure120SystolicAnd80DiastolicIsIdeal", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 18
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -248,14 +248,14 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="BloodPressurePreHigh1")]
+        [Xunit.SkippableFactAttribute(DisplayName="BloodPressure121SystolicAnd81DiastolicIsPreHigh")]
         [Xunit.TraitAttribute("FeatureTitle", "CalculateBloodPressureFeature")]
-        [Xunit.TraitAttribute("Description", "BloodPressurePreHigh1")]
-        public virtual void BloodPressurePreHigh1()
+        [Xunit.TraitAttribute("Description", "BloodPressure121SystolicAnd81DiastolicIsPreHigh")]
+        public virtual void BloodPressure121SystolicAnd81DiastolicIsPreHigh()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("BloodPressurePreHigh1", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("BloodPressure121SystolicAnd81DiastolicIsPreHigh", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 23
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -290,14 +290,14 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="BloodPressurePreHigh2")]
+        [Xunit.SkippableFactAttribute(DisplayName="BloodPressure140SystolicAnd90DiastolicIsPreHigh")]
         [Xunit.TraitAttribute("FeatureTitle", "CalculateBloodPressureFeature")]
-        [Xunit.TraitAttribute("Description", "BloodPressurePreHigh2")]
-        public virtual void BloodPressurePreHigh2()
+        [Xunit.TraitAttribute("Description", "BloodPressure140SystolicAnd90DiastolicIsPreHigh")]
+        public virtual void BloodPressure140SystolicAnd90DiastolicIsPreHigh()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("BloodPressurePreHigh2", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("BloodPressure140SystolicAnd90DiastolicIsPreHigh", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 28
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -332,14 +332,14 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="BloodPressureHigh1")]
+        [Xunit.SkippableFactAttribute(DisplayName="BloodPressure141SystolicAnd91DiastolicIsHigh")]
         [Xunit.TraitAttribute("FeatureTitle", "CalculateBloodPressureFeature")]
-        [Xunit.TraitAttribute("Description", "BloodPressureHigh1")]
-        public virtual void BloodPressureHigh1()
+        [Xunit.TraitAttribute("Description", "BloodPressure141SystolicAnd91DiastolicIsHigh")]
+        public virtual void BloodPressure141SystolicAnd91DiastolicIsHigh()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("BloodPressureHigh1", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("BloodPressure141SystolicAnd91DiastolicIsHigh", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 33
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -374,14 +374,14 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="BloodPressureHigh2")]
+        [Xunit.SkippableFactAttribute(DisplayName="BloodPressure190SystolicAnd100DiastolicIsHigh")]
         [Xunit.TraitAttribute("FeatureTitle", "CalculateBloodPressureFeature")]
-        [Xunit.TraitAttribute("Description", "BloodPressureHigh2")]
-        public virtual void BloodPressureHigh2()
+        [Xunit.TraitAttribute("Description", "BloodPressure190SystolicAnd100DiastolicIsHigh")]
+        public virtual void BloodPressure190SystolicAnd100DiastolicIsHigh()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("BloodPressureHigh2", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("BloodPressure190SystolicAnd100DiastolicIsHigh", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 38
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
