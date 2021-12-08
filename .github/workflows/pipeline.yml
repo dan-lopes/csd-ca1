@@ -23,15 +23,10 @@ jobs:
         run: dotnet build --configuration Release --no-restore
         
       - name: Run Unit Tests - xUnit
-        run: dotnet test --configuration Release --no-restore --verbosity normal
+        run: dotnet test BPCalculator.UnitTests\BPCalculator.UnitTests.csproj --configuration Release --no-restore --verbosity normal
         
-      - name: Run BDD Tests - SpecFlow
-        uses: cryptic-wizard/run-specflow-tests@v1.2.0
-        with:
-          test-assembly-dll: BPCalculator.BDDTests/bin/Release/net5.0/BPCalculator.BDDTests.dll
-          test-execution-json: BPCalculator.BDDTests/bin/Release/net5.0/specflow.json
-          framework: net5.0
-          no-build: true
+      - name: Run Acceptance Tests - BDD SpecFlow
+        run: dotnet test BPCalculator.AcceptanceTests\BPCalculator.AcceptanceTests.csproj --configuration Release --no-restore --verbosity normal        
 
       - name: Publish
         run: dotnet publish -c Release  -o './BP'
