@@ -28,11 +28,10 @@ jobs:
       - name: Run Acceptance Tests - BDD SpecFlow
         run: dotnet test BPCalculator.AcceptanceTests/BPCalculator.AcceptanceTests.csproj -c Release --no-build --verbosity normal -l:trx --collect "Code coverage"
 
-      - name: Generate Test Reports
+      - name: Generate Tests Report
         uses: dorny/test-reporter@v1.5.0
         with:
-          artifact: ''
-          name: MS Tests                  
+          name: Tests Report                 
           path: '**.trx'
           reporter: 'dotnet-trx'  
 
