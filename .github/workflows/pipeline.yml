@@ -19,16 +19,17 @@ jobs:
       - name: Restore Dependencies
         run: dotnet restore
         
-      - name: Build Project
+      - name: Build Project - net5.0
         run: dotnet build --configuration Release --no-restore
         
-      - name: Run Unit Tests
+      - name: Run Unit Tests - xUnit
         run: dotnet test --configuration Release --no-restore --verbosity normal
         
-      - name: Run SpecFlow Tests
+      - name: Run BDD Tests - SpecFlow
         uses: cryptic-wizard/run-specflow-tests@v1.2.0
         with:
-          test-assembly-dll: BPCalculator.BDDTests\bin\Debug\net5.0\BPCalculator.BDDTests.dll
+          test-assembly-dll: BPCalculator.BDDTests/bin/Release/net5.0/BPCalculator.BDDTests.dll
+          test-execution-json: BPCalculator.BDDTests/bin/Release/net5.0/specflow.json
           framework: net5.0
           no-build: true
 
