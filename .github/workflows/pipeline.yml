@@ -23,13 +23,13 @@ jobs:
         run: dotnet build --configuration Release --no-restore
         
       - name: Run Unit Tests - xUnit
-        run: dotnet test BPCalculator.UnitTests/BPCalculator.UnitTests.csproj --configuration Release --no-restore --verbosity normal
+        run: dotnet test BPCalculator.UnitTests/BPCalculator.UnitTests.csproj -c Release --no-build --verbosity normal
         
       - name: Run Acceptance Tests - BDD SpecFlow
-        run: dotnet test BPCalculator.AcceptanceTests/BPCalculator.AcceptanceTests.csproj --configuration Release --no-restore --verbosity normal        
+        run: dotnet test BPCalculator.AcceptanceTests/BPCalculator.AcceptanceTests.csproj -c Release --no-build --verbosity normal        
 
       - name: Publish
-        run: dotnet publish -c Release  -o './BP'
+        run: dotnet publish -c Release --no-build -o './BP'
 
       - name: Azure Login
         uses: Azure/login@v1.4.0
