@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BPCalculator", "BPCalculato
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BPCalculator.UnitTests", "BPCalculator.UnitTests\BPCalculator.UnitTests.csproj", "{CA04B3C2-E7FA-4A93-B0A7-224FB53C5F0F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BPCalculator.BDDTests", "BPCalculator.BDDTests\BPCalculator.BDDTests.csproj", "{1C00DA15-81F2-4F45-8ACD-2EE6510C2A84}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BPCalculator.AcceptanceTests", "BPCalculator.AcceptanceTests\BPCalculator.AcceptanceTests.csproj", "{1C00DA15-81F2-4F45-8ACD-2EE6510C2A84}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

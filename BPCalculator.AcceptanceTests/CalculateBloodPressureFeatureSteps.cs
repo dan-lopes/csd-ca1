@@ -2,7 +2,7 @@
 using TechTalk.SpecFlow;
 using Xunit;
 
-namespace BPCalculator.BDDTests
+namespace BPCalculator.AcceptanceTests
 {
     [Binding]
     public sealed class CalculateBloodPressureFeature

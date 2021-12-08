@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace BPCalculator.BDDTests.Features
+namespace BPCalculator.AcceptanceTests.Features
 {
     using TechTalk.SpecFlow;
     using System;
@@ -31,7 +31,7 @@ namespace BPCalculator.BDDTests.Features
 #line 1 "CalculateBloodPressure.feature"
 #line hidden
         
-        public CalculateBloodPressureFeatureFeature(CalculateBloodPressureFeatureFeature.FixtureData fixtureData, BPCalculator_BDDTests_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
+        public CalculateBloodPressureFeatureFeature(CalculateBloodPressureFeatureFeature.FixtureData fixtureData, BPCalculator_AcceptanceTests_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
         {
             this._testOutputHelper = testOutputHelper;
             this.TestInitialize();
