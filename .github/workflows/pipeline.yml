@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
 
@@ -23,10 +23,10 @@ jobs:
         run: dotnet build --configuration Release --no-restore
         
       - name: Run Unit Tests - xUnit
-        run: dotnet test BPCalculator.UnitTests/BPCalculator.UnitTests.csproj -c Release --no-build --verbosity normal -l:trx --collect "Code coverage"
+        run: dotnet test BPCalculator.UnitTests\BPCalculator.UnitTests.csproj -c Release --no-build --verbosity normal -l:trx --collect "Code coverage"
         
       - name: Run Acceptance Tests - BDD SpecFlow
-        run: dotnet test BPCalculator.AcceptanceTests/BPCalculator.AcceptanceTests.csproj -c Release --no-build --verbosity normal -l:trx --collect "Code coverage"
+        run: dotnet test BPCalculator.AcceptanceTests\BPCalculator.AcceptanceTests.csproj -c Release --no-build --verbosity normal -l:trx --collect "Code coverage"
 
       - name: Generate Tests Report
         uses: dorny/test-reporter@v1.5.0
@@ -36,7 +36,7 @@ jobs:
           reporter: 'dotnet-trx'  
 
       - name: Publish Application
-        run: dotnet publish -c Release --no-build -o './BP'
+        run: dotnet publish -c Release --no-build -o '.\BP'
 
       - name: Azure Login
         uses: Azure/login@v1.4.0
@@ -47,4 +47,4 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: BP-X00192332
-          package: './BP'
+          package: '.\BP'
