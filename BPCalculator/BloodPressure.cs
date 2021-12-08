@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace BPCalculator
 {
@@ -14,10 +13,10 @@ namespace BPCalculator
 
     public class BloodPressure
     {
-        public const int SystolicMin = 70;
-        public const int SystolicMax = 190;
-        public const int DiastolicMin = 40;
-        public const int DiastolicMax = 100;
+        private const int SystolicMin = 70;
+        private const int SystolicMax = 190;
+        private const int DiastolicMin = 40;
+        private const int DiastolicMax = 100;
 
         [Range(SystolicMin, SystolicMax, ErrorMessage = "Invalid Systolic Value")]
         public int Systolic { get; set; }                       // mmHG
@@ -30,7 +29,7 @@ namespace BPCalculator
         {
             get
             {
-                if(Systolic <= 90 && Diastolic <= 60)
+                if (Systolic <= 90 && Diastolic <= 60)
                 {
                     return BPCategory.Low;
                 }
