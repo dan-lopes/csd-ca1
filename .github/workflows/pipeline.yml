@@ -29,9 +29,6 @@ jobs:
       - name: Run Acceptance Tests - BDD SpecFlow
         run: dotnet test BPCalculator.AcceptanceTests\BPCalculator.AcceptanceTests.csproj -c Release --no-build --verbosity normal -l:trx
 
-      - name: Run Code Static Analysis - SonarCloud
-        uses: SonarSource/sonarcloud-github-action@v1.6
-
       - name: Generate Tests Report
         uses: dorny/test-reporter@v1.5.0
         with:
@@ -58,3 +55,21 @@ jobs:
         with:
           app-name: BP-X00192332
           package: '.\BP'
+
+  StaticAnalysis:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v2
+
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v1.8.2
+
+      - name: Restore Dependencies
+        run: dotnet restore
+
+      - name: Build Project - net5.0
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Run Code Static Analysis - SonarCloud
+        uses: SonarSource/sonarcloud-github-action@v1.6
