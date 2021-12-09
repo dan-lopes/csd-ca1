@@ -61,17 +61,15 @@ jobs:
     steps:
       - name: Git checkout
         uses: actions/checkout@v2
-
-      - name: Setup .NET Core SDK
-        uses: actions/setup-dotnet@v1.8.2
-
-      - name: Restore Dependencies
-        run: dotnet restore
-
-      - name: Build Project - net5.0
-        run: dotnet build --configuration Release --no-restore
+        with:
+          fetch-depth: 0
 
       - name: Run Code Static Analysis - SonarCloud
         uses: SonarSource/sonarcloud-github-action@v1.6
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          projectBaseDir: .
+          args: >
+            -Dsonar.organization=dan-lopes
+            -Dsonar.projectKey=dan-lopes_csd-ca1
