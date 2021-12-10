@@ -29,7 +29,16 @@
             <br/>
             @if (ViewData.ModelState.IsValid)
             {
-                <div class="form-group alert alert-success" role="alert" id="alert-message">
+                var alertClass = "form-group alert " +
+                                 Model.BP.Category switch
+                                 {
+                                     BPCategory.Ideal => "alert-success",
+                                     BPCategory.PreHigh => "alert-warning",
+                                     BPCategory.High => "alert-danger",
+                                     _ => "alert-info"
+                                 };
+
+                <div class="@alertClass" role="alert">
                     @Html.DisplayFor(model => model.BP.Category, new { htmlAttributes = new { @class = "form-control" } })
                 </div>
             }
@@ -39,6 +48,4 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-
-    <script>setAlert();</script>
 }
