@@ -7,6 +7,9 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
+env:
+  URI: https://bp-x00192332.azurewebsites.net/
+
 jobs:
   Build_Test_and_Publish:
     runs-on: ubuntu-latest
