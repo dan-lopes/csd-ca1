@@ -35,6 +35,8 @@ namespace BPCalculator
                     "style-src 'self' https://cdn.jsdelivr.net; " +
                     "img-src 'self'");
 
+                context.Response.Headers.Add("X-Frame-Options", "DENY");
+
                 await next();
             });
 
