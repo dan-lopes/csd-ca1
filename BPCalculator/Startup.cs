@@ -27,6 +27,17 @@ namespace BPCalculator
                 app.UseExceptionHandler("/Error");
             }
 
+            app.Use(async (context, next) =>
+            {
+                context.Response.Headers.Add(
+                    "Content-Security-Policy",
+                    "script-src 'self' https://cdn.jsdelivr.net https://code.jquery.com;" +
+                    "style-src 'self' https://cdn.jsdelivr.net; " +
+                    "img-src 'self'");
+
+                await next();
+            });
+
             app.UseStaticFiles();
 
             app.UseRouting();
