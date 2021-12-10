@@ -42,6 +42,22 @@ jobs:
           name: BloodPressureCalculator
           token: ${{ secrets.CODECOV_TOKEN }}
 
+      - name: Dependency Check
+        uses: dependency-check/Dependency-Check_Action@main
+        id: Depcheck
+        with:
+          project: 'BP'
+          path: '.'
+          format: 'HTML'
+          args: >
+            --failOnCVSS 7
+
+      - name: Upload Dependency Check Results
+        uses: actions/upload-artifact@master
+        with:
+          name: Depcheck report
+          path: ${{github.workspace}}/reports
+
       - name: Publish Application
         run: dotnet publish -c Release --no-build -o '.\BP'
 
