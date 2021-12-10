@@ -98,10 +98,10 @@ jobs:
         run: docker pull owasp/zap2docker-weekly
 
       - name: Run Security Scan - OWASP ZAP
-        run: docker run -v /report:/zap/wrk/:rw --user root -t owasp/zap2docker-weekly zap-baseline.py -t ${{env.URI}} -I -r zapreport.html
+        run: docker run -v /report:/zap/wrk/:rw --user root -t owasp/zap2docker-weekly zap-baseline.py -t ${{env.URI}} -I -r owasp_zap_report.html
 
       - uses: actions/upload-artifact@v2
         name: Upload OWASP ZAP Report
         with:
-          name: ZAP Report
-          path: /report/zapreport.html
+          name: OWASP ZAP Report
+          path: /report/owasp_zap_report.html
