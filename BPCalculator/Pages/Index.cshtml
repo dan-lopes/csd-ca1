@@ -22,12 +22,14 @@
                 <input asp-for="BP.Diastolic" class="form-control" />
                 <span asp-validation-for="BP.Diastolic" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
-                <input type="submit" value="Submit" class="btn btn-default" />
+                <input type="submit" value="Submit" class="btn btn-outline-secondary" />
             </div>
+            <br/>
             @if (ViewData.ModelState.IsValid)
             {
-                <div class="form-group">
+                <div class="form-group alert alert-success" role="alert" id="alert-message">
                     @Html.DisplayFor(model => model.BP.Category, new { htmlAttributes = new { @class = "form-control" } })
                 </div>
             }
@@ -37,4 +39,6 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>setAlert();</script>
 }
