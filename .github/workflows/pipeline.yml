@@ -88,7 +88,7 @@ jobs:
         run: docker run -i loadimpact/k6 run - <BPCalculator.E2ETests/k6tests/PerformanceTests.js > k6report.txt
 
       - name: Upload K6 Performance Tests Report
-      - uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v2
         with:
           name: Performance Tests Report
           path: k6report.txt
