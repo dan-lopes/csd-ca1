@@ -39,17 +39,20 @@ jobs:
           name: BloodPressureCalculator
           token: ${{ secrets.CODECOV_TOKEN }}
 
-      - name: Publish Application
-        run: dotnet publish -c Release --no-build -o './BP'
-
   deploy_and_run_performance_tests:
-    name: Deploy to Staging, Run E2E and Performance Tests, Swap Slot
+    name: Publish, Deploy to Staging, Run E2E and Performance Tests, Swap Slot
     needs: build_and_unit_test
     environment:
       name: QA
       url: https://gc-bmicalculator-qa-staging.azurewebsites.net
     runs-on: ubuntu-latest
     steps:
+      - name: Git checkout
+        uses: actions/checkout@v2
+
+      - name: Publish Application
+        run: dotnet publish -c Release -o './BP'
+
       - name: Azure Login
         uses: Azure/login@v1.4.0
         with:
