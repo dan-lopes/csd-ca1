@@ -58,6 +58,8 @@ namespace BPCalculator.E2ETests
 
             var options = new ChromeOptions();
             options.AddArgument("--no-sandbox");
+            options.AddArgument("--headless");
+            options.AddArgument("--disable-dev-shm-usage");
 
             using var driver = new ChromeDriver(chromeDriverPath, options);
             driver.Navigate().GoToUrl(_webAppUri);
