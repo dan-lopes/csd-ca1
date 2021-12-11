@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BPCalculator.UnitTests", "B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BPCalculator.AcceptanceTests", "BPCalculator.AcceptanceTests\BPCalculator.AcceptanceTests.csproj", "{1C00DA15-81F2-4F45-8ACD-2EE6510C2A84}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BPCalculator.E2ETests", "BPCalculator.E2ETests\BPCalculator.E2ETests.csproj", "{6B1B82C6-707E-4146-AE0D-552EE27B62DC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{1C00DA15-81F2-4F45-8ACD-2EE6510C2A84}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1C00DA15-81F2-4F45-8ACD-2EE6510C2A84}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1C00DA15-81F2-4F45-8ACD-2EE6510C2A84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B1B82C6-707E-4146-AE0D-552EE27B62DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B1B82C6-707E-4146-AE0D-552EE27B62DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B1B82C6-707E-4146-AE0D-552EE27B62DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B1B82C6-707E-4146-AE0D-552EE27B62DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
