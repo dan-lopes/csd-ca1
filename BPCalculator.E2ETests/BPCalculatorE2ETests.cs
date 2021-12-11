@@ -56,7 +56,10 @@ namespace BPCalculator.E2ETests
         {
             var chromeDriverPath = Environment.GetEnvironmentVariable("ChromeWebDriver") ?? ".";
 
-            using var driver = new ChromeDriver(chromeDriverPath);
+            var options = new ChromeOptions();
+            options.AddArgument("--no-sandbox");
+
+            using var driver = new ChromeDriver(chromeDriverPath, options);
             driver.Navigate().GoToUrl(_webAppUri);
 
             var systolicElement = driver.FindElement(By.Id("BP_Systolic"));
