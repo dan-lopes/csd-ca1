@@ -31,9 +31,12 @@ namespace BPCalculator
             {
                 context.Response.Headers.Add(
                     "Content-Security-Policy",
-                    "script-src 'self' https://cdn.jsdelivr.net https://code.jquery.com;" +
+                    "script-src 'self' https://cdn.jsdelivr.net https://code.jquery.com; " +
                     "style-src 'self' https://cdn.jsdelivr.net; " +
-                    "img-src 'self'");
+                    "img-src 'self'; " +
+                    "frame-ancestors 'none'; " +
+                    "form-action 'self'; " +
+                    "default-src 'self'; ");
 
                 context.Response.Headers.Add("X-Frame-Options", "DENY");
 
