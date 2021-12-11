@@ -9,6 +9,8 @@ on:
 
 env:
   URI: https://bp-x00192332-qa.azurewebsites.net/
+  APPNAME: BP-X00192332
+  SLOTNAME: qa
 
 jobs:
   build_and_unit_test:
@@ -23,13 +25,13 @@ jobs:
 
       - name: Restore Dependencies
         run: dotnet restore
-        
+
       - name: Build Project - net5.0
         run: dotnet build --configuration Release --no-restore
-        
+
       - name: Run Unit Tests - xUnit
         run: dotnet test BPCalculator.UnitTests/BPCalculator.UnitTests.csproj -c Release --no-build --verbosity normal -l:trx /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:Exclude="[BPCalculator.Views]*"
-        
+
       - name: Run Acceptance Tests - BDD SpecFlow
         run: dotnet test BPCalculator.AcceptanceTests/BPCalculator.AcceptanceTests.csproj -c Release --no-build --verbosity normal -l:trx
 
@@ -39,12 +41,16 @@ jobs:
           name: BloodPressureCalculator
           token: ${{ secrets.CODECOV_TOKEN }}
 
-  deploy_and_run_performance_tests:
+      - name: Generate Tests Report
+        uses: dorny/test-reporter@v1.5.0
+        with:
+          name: Unit and Acceptance Tests Report
+          path: '**.trx'
+          reporter: 'dotnet-trx'
+
+  deploy_and_run_e2e_tests:
     name: Publish, Deploy to Staging, Run E2E and Performance Tests, Swap Slot
     needs: build_and_unit_test
-    environment:
-      name: QA
-      url: https://gc-bmicalculator-qa-staging.azurewebsites.net
     runs-on: ubuntu-latest
     steps:
       - name: Git checkout
@@ -57,12 +63,12 @@ jobs:
         uses: Azure/login@v1.4.0
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-        
+
       - name: Deploy to Azure - QA
         uses: azure/webapps-deploy@v2
         with:
-          app-name: BP-X00192332
-          slot-name: qa
+          app-name: ${{ env.APPNAME }}
+          slot-name: ${{ env.SLOTNAME }}
           package: './BP'
 
       - name: Run E2E Tests - Selenium
@@ -71,9 +77,21 @@ jobs:
       - name: Generate Tests Report
         uses: dorny/test-reporter@v1.5.0
         with:
-          name: Tests Report
+          name: E2E Tests Report
           path: '**.trx'
           reporter: 'dotnet-trx'
+
+      - name: Pull Docker Image for K6
+        run: docker pull loadimpact/k6
+
+      - name: Run Performance Tests - K6
+        run: docker run -i loadimpact/k6 run - <BPCalculator.E2ETests/k6tests/PerformanceTests.js > k6report.txt
+
+      - name: Upload K6 Performance Tests Report
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Performance Tests Report
+          path: k6report.txt
 
   static_analysis_and_dependency_checker:
     name: Run Static Analysis and Dependency Checker
@@ -114,7 +132,7 @@ jobs:
   security_scan:
     name: Run Security Scan
     runs-on: ubuntu-latest
-    needs: deploy_and_run_performance_tests
+    needs: deploy_and_run_e2e_tests
     steps:
       - name: Pull Docker image for OWASP ZAP
         run: docker pull owasp/zap2docker-weekly
