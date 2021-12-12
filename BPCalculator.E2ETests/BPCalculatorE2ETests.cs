@@ -10,18 +10,27 @@ namespace BPCalculator.E2ETests
 {
     public class BPCalculatorE2ETests
     {
-        private readonly IConfiguration _configuration;
-        private readonly string _webAppUri;
+        private readonly ChromeDriver _driver;
 
         public BPCalculatorE2ETests()
         {
-            _configuration = new ConfigurationBuilder()
+            IConfiguration configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", false, false)
                 .AddEnvironmentVariables()
                 .Build();
 
-            _webAppUri = _configuration.GetValue<string>("webAppUri");
+            var webAppUri = configuration.GetValue<string>("webAppUri");
+
+            var chromeDriverPath = Environment.GetEnvironmentVariable("ChromeWebDriver") ?? ".";
+
+            var options = new ChromeOptions();
+            options.AddArgument("--no-sandbox");
+            options.AddArgument("--headless");
+            options.AddArgument("--disable-dev-shm-usage");
+
+            _driver = new ChromeDriver(chromeDriverPath, options);
+            _driver.Navigate().GoToUrl(webAppUri);
         }
 
         [Fact]
@@ -52,37 +61,58 @@ namespace BPCalculator.E2ETests
             Assert.Contains(bpCategory, "High Blood Pressure");
         }
 
+        [Fact]
+        public void BloodPressureCalculator_E2E_Selenium_Test_Charts_Are_Displayed()
+        {
+            var systolic = 190;
+            var diastolic = 100;
+
+            BloodPressureCalculator(systolic, diastolic);
+
+            var chartSystolicDiv = FindElementWait("chart_div_systolic");
+            var chartDiastolicDiv = FindElementWait("chart_div_diastolic");
+
+            Assert.True(chartSystolicDiv.Displayed);
+            Assert.True(chartDiastolicDiv.Displayed);
+
+            var chartSystolic = chartSystolicDiv.FindElements(By.TagName("text"))[1].Text;
+            var chartDiastolic = chartDiastolicDiv.FindElements(By.TagName("text"))[1].Text;
+
+            Assert.Equal(systolic, int.Parse(chartSystolic));
+            Assert.Equal(diastolic, int.Parse(chartDiastolic));
+        }
+
         private string BloodPressureCalculator(int systolic, int diastolic)
         {
-            var chromeDriverPath = Environment.GetEnvironmentVariable("ChromeWebDriver") ?? ".";
-
-            var options = new ChromeOptions();
-            options.AddArgument("--no-sandbox");
-            options.AddArgument("--headless");
-            options.AddArgument("--disable-dev-shm-usage");
-
-            using var driver = new ChromeDriver(chromeDriverPath, options);
-            driver.Navigate().GoToUrl(_webAppUri);
-
-            var systolicElement = driver.FindElement(By.Id("BP_Systolic"));
+            var systolicElement = _driver.FindElement(By.Id("BP_Systolic"));
             systolicElement.Clear();
             systolicElement.SendKeys(systolic.ToString());
 
-            var diastolicElement = driver.FindElement(By.Id("BP_Diastolic"));
+            var diastolicElement = _driver.FindElement(By.Id("BP_Diastolic"));
             diastolicElement.Clear();
             diastolicElement.SendKeys(diastolic.ToString());
 
-            driver.FindElement(By.Id("button_submit")).Submit();
+            _driver.FindElement(By.Id("button_submit")).Submit();
 
-            var resultElement =
-                new WebDriverWait(driver, TimeSpan.FromSeconds(10))
-                    .Until(c => c.FindElement(By.Id("alert_result")));
+            var resultElement = FindElementWait("alert_result");
 
             var bpCategory = resultElement.Text;
 
-            driver.Quit();
-
             return bpCategory;
+        }
+
+        private IWebElement FindElementWait(string elementName)
+        {
+            var element =
+                new WebDriverWait(_driver, TimeSpan.FromSeconds(10))
+                    .Until(c => c.FindElement(By.Id(elementName)));
+
+            return element;
+        }
+
+        ~BPCalculatorE2ETests()
+        {
+            _driver.Quit();
         }
     }
 }
