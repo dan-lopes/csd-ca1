@@ -38,6 +38,7 @@ namespace BPCalculator.E2ETests
         {
             var bpCategory = BloodPressureCalculator(80, 60);
             Assert.Contains(bpCategory, "Low Blood Pressure");
+            _driver.Quit();
         }
 
         [Fact]
@@ -45,6 +46,7 @@ namespace BPCalculator.E2ETests
         {
             var bpCategory = BloodPressureCalculator(120, 80);
             Assert.Contains(bpCategory, "Ideal Blood Pressure");
+            _driver.Quit();
         }
 
         [Fact]
@@ -52,6 +54,7 @@ namespace BPCalculator.E2ETests
         {
             var bpCategory = BloodPressureCalculator(130, 80);
             Assert.Contains(bpCategory, "Pre-High Blood Pressure");
+            _driver.Quit();
         }
 
         [Fact]
@@ -59,6 +62,7 @@ namespace BPCalculator.E2ETests
         {
             var bpCategory = BloodPressureCalculator(190, 100);
             Assert.Contains(bpCategory, "High Blood Pressure");
+            _driver.Quit();
         }
 
         [Fact]
@@ -80,6 +84,8 @@ namespace BPCalculator.E2ETests
 
             Assert.Equal(systolic, int.Parse(chartSystolic));
             Assert.Equal(diastolic, int.Parse(chartDiastolic));
+
+            _driver.Quit();
         }
 
         private string BloodPressureCalculator(int systolic, int diastolic)
@@ -108,11 +114,6 @@ namespace BPCalculator.E2ETests
                     .Until(c => c.FindElement(By.Id(elementName)));
 
             return element;
-        }
-
-        ~BPCalculatorE2ETests()
-        {
-            _driver.Quit();
         }
     }
 }
