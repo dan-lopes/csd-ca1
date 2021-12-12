@@ -2,10 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>1b58b183-3db2-45c8-9716-d5dad45ffd59</UserSecretsId>
+    <ApplicationInsightsResourceId>/subscriptions/56ba4566-2c5e-4883-a17c-25f52e9cf8fd/resourcegroups/BP/providers/Microsoft.Insights/components/BPCalculator_AppInsights</ApplicationInsightsResourceId>
   </PropertyGroup>
 
   <ItemGroup>
     <Folder Include="Data\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.19.0" />
   </ItemGroup>
 
   <Import Project="..\Common\Targets\Signing.targets" />
