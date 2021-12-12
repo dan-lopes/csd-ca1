@@ -11,6 +11,7 @@ env:
   URI: https://bp-x00192332-qa.azurewebsites.net/
   APPNAME: BP-X00192332
   SLOTNAME: qa
+  RESOURCEGROUP: BP
 
 jobs:
   build_and_unit_test:
@@ -81,7 +82,9 @@ jobs:
           path: '**.trx'
           reporter: 'dotnet-trx'
 
-      #SWAP SLOTS
+      - name: Swap QA and Production Slots in Azure
+        run: |
+          az webapp deployment slot swap -n ${{ env.APPNAME }} -g ${{ env.RESOURCEGROUP }} --slot ${{ env.SLOTNAME }} --target-slot production
 
   static_analysis_and_dependency_checker:
     name: Run Static Analysis and Dependency Checker
