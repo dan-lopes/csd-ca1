@@ -10,8 +10,7 @@ namespace BPCalculator.E2ETests
 {
     public class BPCalculatorE2ETests
     {
-        private readonly IConfiguration _configuration;
-        private readonly string _webAppUri;
+        private IConfiguration _configuration;
 
         public BPCalculatorE2ETests()
         {
@@ -20,40 +19,89 @@ namespace BPCalculator.E2ETests
                 .AddJsonFile("appsettings.json", false, false)
                 .AddEnvironmentVariables()
                 .Build();
-
-            _webAppUri = _configuration.GetValue<string>("webAppUri");
         }
 
         [Fact]
         public void BloodPressureCalculator_E2E_Selenium_Test_LowBloodPressure()
         {
-            var bpCategory = BloodPressureCalculator(80, 60);
-            Assert.Contains(bpCategory, "Low Blood Pressure");
+            using (var driver = GetChromeDriver())
+            {
+                var bpCategory = BloodPressureCalculator(driver, 80, 60);
+                driver.Quit();
+
+                Assert.Contains(bpCategory, "Low Blood Pressure");
+            }
         }
 
         [Fact]
         public void BloodPressureCalculator_E2E_Selenium_Test_IdealBloodPressure()
         {
-            var bpCategory = BloodPressureCalculator(120, 80);
-            Assert.Contains(bpCategory, "Ideal Blood Pressure");
+            using (var driver = GetChromeDriver())
+            {
+                var bpCategory = BloodPressureCalculator(driver, 120, 80);
+                driver.Quit();
+
+                Assert.Contains(bpCategory, "Ideal Blood Pressure");
+            }
         }
 
         [Fact]
         public void BloodPressureCalculator_E2E_Selenium_Test_PreHighBloodPressure()
         {
-            var bpCategory = BloodPressureCalculator(130, 80);
-            Assert.Contains(bpCategory, "Pre-High Blood Pressure");
+            using (var driver = GetChromeDriver())
+            {
+                var bpCategory = BloodPressureCalculator(driver, 130, 80);
+                driver.Quit();
+
+                Assert.Contains(bpCategory, "Pre-High Blood Pressure");
+            }
         }
 
         [Fact]
         public void BloodPressureCalculator_E2E_Selenium_Test_HighBloodPressure()
         {
-            var bpCategory = BloodPressureCalculator(190, 100);
-            Assert.Contains(bpCategory, "High Blood Pressure");
+            using (var driver = GetChromeDriver())
+            {
+                var bpCategory = BloodPressureCalculator(driver, 190, 100);
+                driver.Quit();
+
+                Assert.Contains(bpCategory, "High Blood Pressure");
+            }
         }
 
-        private string BloodPressureCalculator(int systolic, int diastolic)
+        [Fact]
+        public void BloodPressureCalculator_E2E_Selenium_Test_Charts_Are_Displayed()
         {
+            using (var driver = GetChromeDriver())
+            {
+                var systolic = 190;
+                var diastolic = 100;
+
+                BloodPressureCalculator(driver, systolic, diastolic);
+
+                var chartSystolicDiv = FindElementWait(driver, "chart_div_systolic");
+                var chartDiastolicDiv = FindElementWait(driver, "chart_div_diastolic");
+
+                var chartSystolicDisplayed = chartSystolicDiv.Displayed;
+                var chartDiastolicDisplayed = chartDiastolicDiv.Displayed;
+
+                var chartSystolic = chartSystolicDiv.FindElements(By.TagName("text"))[1].Text;
+                var chartDiastolic = chartDiastolicDiv.FindElements(By.TagName("text"))[1].Text;
+
+                driver.Quit();
+
+                Assert.True(chartSystolicDisplayed);
+                Assert.True(chartDiastolicDisplayed);
+
+                Assert.Equal(systolic, int.Parse(chartSystolic));
+                Assert.Equal(diastolic, int.Parse(chartDiastolic));
+            }
+        }
+
+        private ChromeDriver GetChromeDriver()
+        {
+            var webAppUri = _configuration.GetValue<string>("webAppUri");
+
             var chromeDriverPath = Environment.GetEnvironmentVariable("ChromeWebDriver") ?? ".";
 
             var options = new ChromeOptions();
@@ -61,9 +109,14 @@ namespace BPCalculator.E2ETests
             options.AddArgument("--headless");
             options.AddArgument("--disable-dev-shm-usage");
 
-            using var driver = new ChromeDriver(chromeDriverPath, options);
-            driver.Navigate().GoToUrl(_webAppUri);
+            var driver = new ChromeDriver(chromeDriverPath, options);
+            driver.Navigate().GoToUrl(webAppUri);
 
+            return driver;
+        }
+
+        private string BloodPressureCalculator(IWebDriver driver, int systolic, int diastolic)
+        {
             var systolicElement = driver.FindElement(By.Id("BP_Systolic"));
             systolicElement.Clear();
             systolicElement.SendKeys(systolic.ToString());
@@ -74,15 +127,20 @@ namespace BPCalculator.E2ETests
 
             driver.FindElement(By.Id("button_submit")).Submit();
 
-            var resultElement =
-                new WebDriverWait(driver, TimeSpan.FromSeconds(10))
-                    .Until(c => c.FindElement(By.Id("alert_result")));
+            var resultElement = FindElementWait(driver, "alert_result");
 
             var bpCategory = resultElement.Text;
 
-            driver.Quit();
-
             return bpCategory;
+        }
+
+        private IWebElement FindElementWait(IWebDriver driver, string elementName)
+        {
+            var element =
+                new WebDriverWait(driver, TimeSpan.FromSeconds(10))
+                    .Until(c => c.FindElement(By.Id(elementName)));
+
+            return element;
         }
     }
 }
