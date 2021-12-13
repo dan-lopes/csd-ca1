@@ -38,7 +38,7 @@ namespace BPCalculator
             {
                 context.Response.Headers.Add(
                     "Content-Security-Policy",
-                    "script-src 'self' https://cdn.jsdelivr.net https://code.jquery.com https://www.gstatic.com; " +
+                    "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://code.jquery.com https://www.gstatic.com; " +
                     "style-src 'self' https://cdn.jsdelivr.net https://www.gstatic.com; " +
                     "img-src 'self'; " +
                     "frame-ancestors 'none'; " +
