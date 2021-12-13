@@ -72,15 +72,15 @@ jobs:
           slot-name: ${{ env.SLOTNAME }}
           package: './BP'
 
-      - name: Run E2E Tests - Selenium
-        run: dotnet test BPCalculator.E2ETests/BPCalculator.E2ETests.csproj -c Release --no-build --verbosity normal --logger:"trx;LogFileName=selenium.trx"
-
-      - name: Generate Tests Report
-        uses: dorny/test-reporter@v1.5.0
-        with:
-          name: E2E Tests Report
-          path: '**.trx'
-          reporter: 'dotnet-trx'
+#      - name: Run E2E Tests - Selenium
+#        run: dotnet test BPCalculator.E2ETests/BPCalculator.E2ETests.csproj -c Release --no-build --verbosity normal --logger:"trx;LogFileName=selenium.trx"
+#
+#      - name: Generate Tests Report
+#        uses: dorny/test-reporter@v1.5.0
+#        with:
+#          name: E2E Tests Report
+#          path: '**.trx'
+#          reporter: 'dotnet-trx'
 
       - name: Swap QA and Production Slots in Azure
         run: |
