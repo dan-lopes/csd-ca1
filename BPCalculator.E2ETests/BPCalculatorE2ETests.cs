@@ -85,16 +85,10 @@ namespace BPCalculator.E2ETests
                 var chartSystolicDisplayed = chartSystolicDiv.Displayed;
                 var chartDiastolicDisplayed = chartDiastolicDiv.Displayed;
 
-                var chartSystolic = chartSystolicDiv.FindElements(By.TagName("text"))[1].Text;
-                var chartDiastolic = chartDiastolicDiv.FindElements(By.TagName("text"))[1].Text;
-
                 driver.Quit();
 
                 Assert.True(chartSystolicDisplayed);
                 Assert.True(chartDiastolicDisplayed);
-
-                Assert.Equal(systolic, int.Parse(chartSystolic));
-                Assert.Equal(diastolic, int.Parse(chartDiastolic));
             }
         }
 
