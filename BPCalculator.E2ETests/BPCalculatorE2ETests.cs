@@ -108,6 +108,9 @@ namespace BPCalculator.E2ETests
             options.AddArgument("--no-sandbox");
             options.AddArgument("--headless");
             options.AddArgument("--disable-dev-shm-usage");
+            options.AddArgument("--ignore-certificate-errors");
+            options.AddArgument("--incognito");
+            options.AddArgument("--start-maximized");
 
             var driver = new ChromeDriver(chromeDriverPath, options);
             driver.Navigate().GoToUrl(webAppUri);
@@ -117,11 +120,11 @@ namespace BPCalculator.E2ETests
 
         private string BloodPressureCalculator(IWebDriver driver, int systolic, int diastolic)
         {
-            var systolicElement = driver.FindElement(By.Id("BP_Systolic"));
+            var systolicElement = FindElementWait(driver, "BP_Systolic");
             systolicElement.Clear();
             systolicElement.SendKeys(systolic.ToString());
 
-            var diastolicElement = driver.FindElement(By.Id("BP_Diastolic"));
+            var diastolicElement = FindElementWait(driver, "BP_Diastolic");
             diastolicElement.Clear();
             diastolicElement.SendKeys(diastolic.ToString());
 
@@ -137,7 +140,7 @@ namespace BPCalculator.E2ETests
         private IWebElement FindElementWait(IWebDriver driver, string elementName)
         {
             var element =
-                new WebDriverWait(driver, TimeSpan.FromSeconds(10))
+                new WebDriverWait(driver, TimeSpan.FromSeconds(15))
                     .Until(c => c.FindElement(By.Id(elementName)));
 
             return element;
